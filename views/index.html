@@ -30,20 +30,23 @@
             <div id='shipMainTop' class='shadeMe'></div>
             <div id='shipMainBack' class='shadeMe'></div>
         </div>
-        <div id = 'tunnel'>
-    
-            <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:{{tunEl.color}};z-index:{{tunEl.zindex}}'></div>
+        <div style='z-index:500;background:#000;'>
+            {{currX}}/ {{currY}}
+        </div>
+        <div id='tunnel'>
+
+            <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:{{tunEl.color}};z-index:{{tunEl.zindex}};left:{{tunEl.left}};top:{{tunEl.top}}'></div>
         </div>
     </div>
 
-        
-            <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-            <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-            <script src='/angular/angular.js'></script>
-            <script src='/js/controllers/MainController.js'></script>
-            <script src='/js/factories/socket.js'></script>
-            <script src='/js/socket.js'>
-            </script>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src='/angular/angular.js'></script>
+    <script src='/js/controllers/MainController.js'></script>
+    <script src='/js/factories/socket.js'></script>
+    <script src='/js/socket.js'>
+    </script>
 </body>
 
 </html>
