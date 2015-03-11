@@ -1,25 +1,49 @@
 <!Doctype html>
 <html>
+
 <head>
-    <title>Tilt Music</title>
+    <title>Phone Orientation Stuff</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/stylesheets/style.css" rel="stylesheet" />
 </head>
+
 <body>
     </div>
-        <h1 class="text-center">Ship Stuff</h1>
-        <h2>Witty sub-title to be determined</h2>
+    <h1 class="text-center">Ship Stuff</h1>
+    <h2 class='text-center'>Witty sub-title to be determined</h2>
     </div>
 
     <div ng-app='Ship' ng-controller='MainController' id='container'>
-  
+        <div id='shipCont'>
+            <div id='shipNoseBot' class='shipNose shadeMe'></div>
+            <div id='shipNoseLef' class='shipNose shadeMe'></div>
+            <div id='shipNoseRit' class='shipNose shadeMe'></div>
+            <div id='shipNoseTop' class='shipNose shadeMe'></div>
+            <div id='shipMainBot'></div>
+            <div id='shipSideL' class='shipSide shadeMe'>
+                <div class='shipSideTop shadeMe'></div>
+            </div>
+            <div id='shipSideR' class='shipSide shadeMe'>
+                <div class='shipSideTop shadeMe'></div>
+            </div>
+            <div id='shipWindow' class='shadeMe'></div>
+            <div id='shipMainTop' class='shadeMe'></div>
+            <div id='shipMainBack' class='shadeMe'></div>
+        </div>
+        <div id = 'tunnel'>
+            {{tunnelEls}}
+            <div ng-repeat='tunEl in tunnelEls' class='tun' style='width:{{tunEl.size}};height:{{tunEl.size}};border-color:{{tunEl.color}}'></div>
+        </div>
     </div>
 
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src='/angular/angular.js'></script> 
-    <script src='/js/controllers/MainController.js'></script>
-    <script src='/js/factories/socket.js'></script>
-    <script src='/js/socket.js'> </script>
+            <div id='targ'></div>
+            <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+            <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+            <script src='/angular/angular.js'></script>
+            <script src='/js/controllers/MainController.js'></script>
+            <script src='/js/factories/socket.js'></script>
+            <script src='/js/socket.js'>
+            </script>
 </body>
+
 </html>
