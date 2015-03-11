@@ -111,6 +111,6 @@ h1, h2, h3, p {
     position: absolute;
     width:100px;
     height:100px;
-    left:0;
-    top:0;
+    left:50%;
+    top:50%;
 }

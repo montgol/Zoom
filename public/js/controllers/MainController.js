@@ -3,49 +3,68 @@ var app = angular.module("Ship", []);
 
 app.controller("MainController", function($scope) {
     $scope.tunnelEls = [{
-        size: '5vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '10vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '15vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '20vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '25vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '30vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '35vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '40vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '45vh'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '50vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '55vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '60vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '65vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '70vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '75vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '80vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '85vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }, {
-        size: '90vh',
-        color: '#000900'
+        size: '50px',
+        color: 'rgb(0,0,0)'
     }];
+    var ringLen = $scope.tunnelEls.length;
+    var currSize=1;
+    for (var i = 0; i < ringLen; i++) {
+        var col = parseInt((255 * (i + 1) / ringLen));
+        $scope.tunnelEls[i].color = 'rgb(0,' + col + ',0)'
+        $scope.tunnelEls[i].zindex = (i - 8);
+        $scope.tunnelEls[i].size = currSize;
+        currSize *=1.2;
+    }
+
 });

@@ -31,12 +31,14 @@
             <div id='shipMainBack' class='shadeMe'></div>
         </div>
         <div id = 'tunnel'>
-            {{tunnelEls}}
-            <div ng-repeat='tunEl in tunnelEls' class='tun' style='width:{{tunEl.size}};height:{{tunEl.size}};border-color:{{tunEl.color}}'></div>
+    
+            <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:{{tunEl.color}};z-index:{{tunEl.zindex}}'></div>
         </div>
     </div>
 
+
             <!-- <div id='targ'></div> -->
+
             <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
             <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
             <script src='/angular/angular.js'></script>
