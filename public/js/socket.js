@@ -18,7 +18,7 @@ if (navigator.vibrate) {
 if (isPhone) {
     //if it's a phone, listen for controls
     window.addEventListener('deviceorientation', function(e) {
-        var pitch = Math.floor((Math.max(0, Math.min(e.beta, 90)) / 90) * 360);
+        var pitch = 
         socket.emit('controlMove', pitch);
         $('#freqMon').val(pitch);
     });
