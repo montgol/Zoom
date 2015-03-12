@@ -113,6 +113,7 @@ h1, h2, h3, p {
     height:100px;
     left:50%;
     top:50%;
+    border-color:hsl(0,100%,50%);
 }
 
 //medium+ screen sizes

@@ -49,7 +49,6 @@ function shader(xIn, yIn) {
         var adjRotY = (rotsY[i] + yIn) % 360;
         var colVal = parseInt(204 - (((adjRotX + adjRotY) / 720) * 125));
         var col = 'rgb(' + colVal + ',' + colVal + ',' + colVal + ')';
-        console.log(col);
         // 104 dif (100 to 204)
 
         allInfo += allToShade[i].id + ' | ' + allToShade[i].className;
