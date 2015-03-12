@@ -116,14 +116,14 @@ h1, h2, h3, p {
 }
 
 //medium+ screen sizes
-@media (min-width:992px) {
+/*@media (min-width:992px) {
     .desktop-only {
         display:block !important;
     }
-}
+}*/
  
 //small screen sizes
-@media (max-width: 991px) {
+/*@media (max-width: 991px) {
     .mobile-only {
         display:block !important;
     }
@@ -131,4 +131,4 @@ h1, h2, h3, p {
     .desktop-only {
         display:none !important;
     }
-}
+}*/
