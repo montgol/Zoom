@@ -3,6 +3,7 @@ html, body {
     height: 100%;
     background-color: #000;
     color:#fff;
+    z-index:1;
 }
 h1, h2, h3, p {
     color: #CCC;
@@ -10,13 +11,21 @@ h1, h2, h3, p {
 #container {
     transform-style: preserve-3d;
     position: relative;
+    z-index:1;
+}
+#meta-container{
+    width:90vw;
+    height:90vw;
+    z-index:2;
+    transform:translateZ(0px);
 }
 #shipCont {
     transform-style: preserve-3d;
-    position: relative;
-    transform:rotateY(0deg);
-    width: 50px;
-    left: 40%;
+    position: absolute;
+    transform-origin:50% 250px;
+    left: 50%;
+    width:50px;
+    z-index:500;
 }
 .shipNose {
     width: 0px;
@@ -25,95 +34,34 @@ h1, h2, h3, p {
     border-right: 50px solid transparent;
     border-bottom: 300px solid #ccc;
     position: absolute;
+    z-index:1000;
 }
 #shipNoseBot {
     transform: rotateY(0deg) translateZ(25px) rotateX(9.46deg);
 }
 #shipNoseLef {
     transform: rotateY(90deg) translateZ(25px) rotateX(9.46deg);
+    border-bottom: 300px solid #c9c9c9;
 }
 #shipNoseTop {
     transform: rotateY(180deg) translateZ(25px) rotateX(9.46deg);
+    border-bottom: 300px solid #d0d0d0;
 }
 #shipNoseRit {
     transform: rotateY(270deg) translateZ(25px) rotateX(9.46deg);
-}
-#shipMainBot {
-    width: 100px;
-    height: 150px;
-    background-color: #ccc;
-    position: absolute;
-    top: 299px;
-    transform: translateZ(50px);
-}
-.shipSide {
-    width: 100px;
-    height: 150px;
-    position: absolute;
-    background-color: #ccc;
-    top: 299px;
-}
-.shipSideTop {
-    width: 0;
-    height: 150px;
-    position: absolute;
-    left: 100px;
-    border-left: 40px solid #ccc;
-    border-top: 60px solid transparent;
-}
-#shipSideL {
-    transform: rotateY(90deg) translateZ(50px);
-}
-#shipSideR {
-    transform: rotateY(90deg) translateZ(-50px);
-}
-#shipWindow {
-    width: 100px;
-    height: 72.11px;
-    background: rgba(100, 100, 100, .7);
-    position: absolute;
-    top: 294px;
-    border: 1px solid #555;
-    transform: translateZ(-69px) rotateX(-33.7deg);
-}
-#shipMainTop {
-    width: 100px;
-    height: 90px;
-    background: #ccc;
-    position: absolute;
-    top: 359px;
-    border: 1px solid #999;
-    transform: translateZ(-90px);
-}
-#shipMainBack {
-    width: 100px;
-    height: 140px;
-    background: #ccc;
-    position: absolute;
-    top: 379px;
-    border: 1px solid #999;
-    transform: rotateX(90deg) translateY(-20px);
-}
-
-#targ{
-    position:fixed;
-    width:400px;
-    height:300px;
-    bottom:0px;
-    right:0px;
-    background-color:#597;
-    overflow:scroll;
+    border-bottom: 300px solid #c0c0c0;
 }
 
 .tun{
     border-radius: 50%;
     border:4px solid #0f0;
     position: absolute;
-    width:100px;
-    height:100px;
+    width:10%;
+    height:10%;
     left:50%;
     top:50%;
     border-color:hsl(0,100%,50%);
+    text-align: center;
 }
 
 //medium+ screen sizes

@@ -5,6 +5,7 @@
     <title>Phone Orientation Stuff</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/stylesheets/style.css" rel="stylesheet" />
+    <link href="/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -13,25 +14,17 @@
     <h2 class='text-center'>Witty sub-title to be determined</h2>
 
     <div ng-app='Ship' ng-controller='MainController' id='container'>
-        <div id='shipCont'>
-            <div id='shipNoseBot' class='shipNose shadeMe'></div>
-            <div id='shipNoseLef' class='shipNose shadeMe'></div>
-            <div id='shipNoseRit' class='shipNose shadeMe'></div>
-            <div id='shipNoseTop' class='shipNose shadeMe'></div>
-            <div id='shipMainBot'></div>
-            <div id='shipSideL' class='shipSide shadeMe'>
-                <div class='shipSideTop shadeMe'></div>
+        <div id='meta-container'>
+            <div id='shipCont'>
+                <div id='shipNoseBot' class='shipNose shadeMe'></div>
+                <div id='shipNoseLef' class='shipNose shadeMe'></div>
+                <div id='shipNoseRit' class='shipNose shadeMe'></div>
+                <div id='shipNoseTop' class='shipNose shadeMe'></div>
             </div>
-            <div id='shipSideR' class='shipSide shadeMe'>
-                <div class='shipSideTop shadeMe'></div>
-            </div>
-            <div id='shipWindow' class='shadeMe'></div>
-            <div id='shipMainTop' class='shadeMe'></div>
-            <div id='shipMainBack' class='shadeMe'></div>
-        </div>
-        <div id='tunnel'>
+            <div id='tunnel'>
 
-            <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,50%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;box-shadow:0 0 10px hsl({{stepHue}},{{tunEl.sat}}%,50%) inset;'></div>
+                <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,{{tunEl.col}}%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;'>|</div>
+            </div>
         </div>
     </div>
 
@@ -39,10 +32,10 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src='/angular/angular.js'></script>
+    <script src='/ngDialog/js/ngDialog.min.js'></script>
     <script src='/js/controllers/MainController.js'></script>
     <script src='/js/factories/socket.js'></script>
-    <script src='/js/socket.js'>
-    </script>
+    
 </body>
 
 </html>
