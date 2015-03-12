@@ -1,7 +1,36 @@
-var app = angular.module("Ship", []);
+var app = angular.module("Ship", ['ngDialog']);
+
+var socket = io();
+
+var allToShade = document.getElementsByClassName('shadeMe');
+
+//on page load, check if user is using a phone. If they are, this render will be the controller. Otherwise, it's the viewer
+
 
 
 app.controller("MainController", function($scope) {
+
+    $('#shipCont').css('transform', 'rotateX(90deg) ');
+
+    var xRot = 0,
+        yRot = 0,
+        currXPos = 50,
+        currYPos = 50,
+        calib = 180,
+        currXStep = 0,
+        currYStep = 0,
+        beenCalibrated = false;
+    // enable vibration support
+    socket.on('moveShip', function(moveObj) {
+        // find rotation
+        xRot = 90 - (moveObj.pitch % 360);
+        yRot = (-moveObj.roll % 360) - calib;
+        $('#shipCont').css('transform', 'rotateX(' + xRot + 'deg)  rotateY('+(180-yRot)+'deg)  rotateZ(' + yRot + 'deg)');
+        if (!beenCalibrated){
+            calib = -moveObj.roll;
+            beenCalibrated=true;
+        }
+    })
     $scope.tunnelEls = [{
         size: '50px',
         left: 50,
@@ -78,8 +107,7 @@ app.controller("MainController", function($scope) {
     var ringLen = $scope.tunnelEls.length;
     var currSize = 1;
     for (var i = 0; i < ringLen; i++) {
-        var col = parseInt((255 * (i + 1) / ringLen));
-        $scope.tunnelEls[i].color = 'rgb(0,' + col + ',0)';
+        $scope.tunnelEls[i].col = parseInt((50 * (i + 1) / ringLen));
         $scope.tunnelEls[i].zindex = (i - 8);
         $scope.tunnelEls[i].size = currSize;
         $scope.tunnelEls[i].left = 50;
@@ -117,19 +145,28 @@ app.controller("MainController", function($scope) {
                         $scope.tunnelEls[i].left--;
                     }
                 }
-                
+
                 currRing++;
             }
-            var ringToGlow = 18 - (currTime % ringLen);
+            var ringToGray = 18 - (currTime % ringLen);
+            var ringToGray2 = 18 -((currTime-1)%ringLen);
+            var ringToGray3 = 18 -((currTime-2)%ringLen);
+            var ringToGray4 = 18 -((currTime-3)%ringLen);
             for (var i = 0; i < ringLen; i++) {
                 //find the one grey ring
-                if (i == ringToGlow) {
+                if (i == ringToGray) {
+                    $scope.tunnelEls[i].sat = 0;
+                } else if(i == ringToGray2){
+                    $scope.tunnelEls[i].sat = 25;
+                } else if(i == ringToGray3){
                     $scope.tunnelEls[i].sat = 50;
-                } else {
+                } else if(i == ringToGray4){
+                    $scope.tunnelEls[i].sat = 75;
+                }
+                else {
                     $scope.tunnelEls[i].sat = 100;
                 }
             }
-            $scope.$apply();
         } else {
             if ($scope.stepHue) {
                 $scope.stepHue -= 20;
@@ -144,8 +181,53 @@ app.controller("MainController", function($scope) {
             currX = 50 + ((Math.floor(Math.random() * 5) - 2) * 8);
             currY = 50 + ((Math.floor(Math.random() * 5) - 2) * 8);
             currRing = 0; //reset ring to change
-            $scope.$apply();
+            
+        }
+        $scope.moveShip();
+        $scope.checkShip();
+        $scope.$apply();
+    }, 25);
+
+    $scope.moveShip = function() {
+        //note these are kinda backwards
+        var xRotAdj =(xRot - 90);
+            //left and right based on Y axis
+        if (Math.abs(yRot) > 0 ) {
+            currXStep = (yRot / 90) * 2.5; //yes, X. We're rotating along Y AXIS and moving along X
+        } else if (currXPos >= 100 || currXPos <= 0) {
+            currXStep = 0;
         }
 
-    }, 25);
+        if (Math.abs(xRotAdj) > 0) {
+            currYStep = (xRotAdj / 90) * 2.5;
+        } else if (currYPos >= 100 || currYPos <= 0) {
+            currYStep = 0;
+        }
+
+        currXPos -= currXStep;
+        currYPos += currYStep;
+        // console.log('curr posX:',currXPos,'curr posY',currYPos)
+        $('#shipCont').css({
+            'left': parseInt(currXPos) + '%',
+            'top': parseInt(currYPos) + '%'
+        })
+
+    }
+    $scope.checkShip = function(){
+        var ringX = $scope.tunnelEls[11].left;
+        var ringY = $scope.tunnelEls[11].top;
+        var distance=Math.sqrt(Math.pow((currXPos-ringX),2)+Math.pow((currYPos-ringY),2));
+        
+        if (distance>42){
+            console.log('LOSE');
+            var lose = ngDialog.open({
+                template:'<b>OH NOES</b>',
+                plain: true,
+                className: 'ngdialog-theme-plain'
+            });
+        }
+        else{
+            console.log('Dist: ',ringX,ringY,distance)
+        }
+    }
 });

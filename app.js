@@ -8,38 +8,31 @@ var routes = require('./routes');
 var config = require('./.config');
 
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html')
 
 //use stuff
 app.use(logger('dev'));
-app.use(bodyParser.json()); //not sure if we'll explicityl need this, but... meh
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, 'views')));
 
-app.get('/',function(req,res,next){
-    res.sendFile(__dirname+ '/views/index.html');
-});
+app.use('/',routes);
 
-app.get('/mobile', function(req,res,next){
-    res.sendFile(__dirname+ '/views/mobile.html');
-});
-
-app.get('/desktop', function(req,res,next){
-    res.sendFile(__dirname+ '/views/desktop.html');
-});
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 io.on('connection', function(socket) {
 
-    socket.on('controlMove', function(pitch) {
+    socket.on('controlMove', function(moveObj) {
         //Do stuff!
-        var moveDataToShip;
-        io.emit('moveShip', moveDataToShip); //move the ship 
+        console.log(moveObj);
+        io.emit('moveShip', moveObj); //move the ship 
     });
 
 });

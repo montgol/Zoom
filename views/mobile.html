@@ -1,1 +1,28 @@
-<h1>got to mobile<h1>
+<!Doctype html>
+<html>
+
+<head>
+    <title>Phone Orientation Stuff</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <div ng-app='shipMobile' ng-controller='mobileController'>
+    	Hi!
+    	{{test}}
+    </div>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js">
+    </script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src='/angular/angular.js'></script>
+    <script src='/js/controllers/mobileController.js'></script>
+    <script src='/js/factories/socket.js'></script>
+    <script src='/js/mobile.js'>
+    </script>
+</body>
+
+</html>
