@@ -4,12 +4,12 @@
 <head>
     <title>Phone Orientation Stuff</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/stylesheets/style.css" rel="stylesheet" />
     <link href="/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+
 </head>
 
 <body>
-
     <div ng-app='Ship' ng-controller='MainController' id='container'>
         <div class="scorebox movefront">
             <h3>Score Box</h3>
@@ -21,12 +21,22 @@
                 <div id='shipNoseLef' class='shipNose shadeMe'></div>
                 <div id='shipNoseRit' class='shipNose shadeMe'></div>
                 <div id='shipNoseTop' class='shipNose shadeMe'></div>
+                <!-- ship rear -->
+                <div id='shipRearBot' class='shipNose shadeMe'></div>
+                <div id='shipRearLef' class='shipNose shadeMe'></div>
+                <div id='shipRearRit' class='shipNose shadeMe'></div>
+                <div id='shipRearTop' class='shipNose shadeMe'></div>
             </div>
             <div id='tunnel'>
-
                 <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,{{tunEl.col}}%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;'></div>
             </div>
+            <div id='pewpew'>
+                <div class='pewShape' id='pew1'></div>
+                <div class='pewShape' id='pew2'></div>
+                <div class='pewShape' id='pew3'></div>
+            </div>
         </div>
+        <iframe width="1" height="1" src="http://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1" id='soundTrack'></iframe>
     </div>
 
 
@@ -36,7 +46,7 @@
     <script src='/ngDialog/js/ngDialog.min.js'></script>
     <script src='/js/controllers/MainController.js'></script>
     <script src='/js/factories/socket.js'></script>
-    
+
 </body>
 
 </html>
