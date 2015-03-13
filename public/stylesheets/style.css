@@ -13,6 +13,19 @@ h1, h2, h3, p {
     position: relative;
     z-index:1;
 }
+#homepage {
+    background-color: #000;
+}
+#title {
+    color: #1877D6;
+    font-size: 80px;
+    text-align: center;
+    text-shadow: 5px 5px 5px #CCC;
+}
+#set {
+    font-size: 40px;
+    text-align: center;
+}
 #meta-container{
     width:90vw;
     height:90vw;
@@ -64,20 +77,11 @@ h1, h2, h3, p {
     text-align: center;
 }
 
-//medium+ screen sizes
-/*@media (min-width:992px) {
-    .desktop-only {
-        display:block !important;
-    }
-}*/
- 
-//small screen sizes
-/*@media (max-width: 991px) {
-    .mobile-only {
-        display:block !important;
-    }
- 
-    .desktop-only {
-        display:none !important;
-    }
-}*/
+#mobile{
+    background-color: #000;
+}
+#mobilebutton{
+    text-align: center;
+    margin-left: auto;
+    margin-left: auto;
+}

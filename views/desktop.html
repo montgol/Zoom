@@ -9,10 +9,9 @@
 </head>
 
 <body>
-
+    <div class="scorebox"><div>
     <h1 class="text-center">Ship Stuff</h1>
     <h2 class='text-center'>Witty sub-title to be determined</h2>
-
     <div ng-app='Ship' ng-controller='MainController' id='container'>
         <div id='meta-container'>
             <div id='shipCont'>
@@ -23,7 +22,7 @@
             </div>
             <div id='tunnel'>
 
-                <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,{{tunEl.col}}%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;'>|</div>
+                <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,{{tunEl.col}}%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;'></div>
             </div>
         </div>
     </div>
