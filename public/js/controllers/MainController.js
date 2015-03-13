@@ -8,7 +8,11 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
+<<<<<<< HEAD
+app.controller("MainController", function($scope,ngDialog) {
+=======
 app.controller("MainController", function($scope, ngDialog) {
+>>>>>>> master
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
 
@@ -151,20 +155,26 @@ app.controller("MainController", function($scope, ngDialog) {
 
                 currRing++;
             }
-            var ringToGray = 18 - (currTime % ringLen);
-            var ringToGray2 = 18 -((currTime-1)%ringLen);
-            var ringToGray3 = 18 -((currTime-2)%ringLen);
-            var ringToGray4 = 18 -((currTime-3)%ringLen);
+            var ringToGray = 18 - (currTime*2 % ringLen);
+            var ringToGray2 = 18 -(((currTime*2)-1)%ringLen);
+            var ringToGray3 = 18 -(((currTime*2)-2)%ringLen);
+            var ringToGray4 = 18 -(((currTime*2)-3)%ringLen);
+            var ringToGray5 = 18 -(((currTime*2)-4)%ringLen);
+            var ringToGray6 = 18 -(((currTime*2)-5)%ringLen);
             for (var i = 0; i < ringLen; i++) {
                 //find the one grey ring
                 if (i == ringToGray) {
-                    $scope.tunnelEls[i].sat = 0;
+                    $scope.tunnelEls[i].sat = 100;
                 } else if(i == ringToGray2){
-                    $scope.tunnelEls[i].sat = 25;
+                    $scope.tunnelEls[i].sat = 66;
                 } else if(i == ringToGray3){
-                    $scope.tunnelEls[i].sat = 50;
+                    $scope.tunnelEls[i].sat = 33;
                 } else if(i == ringToGray4){
-                    $scope.tunnelEls[i].sat = 75;
+                    $scope.tunnelEls[i].sat = 0;
+                } else if(i == ringToGray5){
+                    $scope.tunnelEls[i].sat = 33;
+                } else if(i == ringToGray6){
+                    $scope.tunnelEls[i].sat = 66;
                 }
                 else {
                     $scope.tunnelEls[i].sat = 100;
@@ -230,11 +240,13 @@ app.controller("MainController", function($scope, ngDialog) {
                 $("body").css("background-color", "yellow");
                 score = timesPlayed;
                 timesPlayed = 0;
+                socket.emit('buzz',{err:2});
                 console.log("@@@@@@@@@@@@@@@ 1 life lost ", score);
             } else if (lossCount == 2) {
                 $("body").css("background-color", "red");
                 score += timesPlayed;
                 timesPlayed = 0;
+                socket.emit('buzz',{err:2});
                 console.log("@@@@@@@@@@@@@@@ 2 lives lost ", score);
             // player loses, game is stopped, score is calculated and shown
             } else if (lossCount == 3) {
