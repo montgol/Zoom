@@ -8,11 +8,8 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
-<<<<<<< HEAD
-app.controller("MainController", function($scope,ngDialog) {
-=======
 app.controller("MainController", function($scope, ngDialog) {
->>>>>>> master
+
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
 
