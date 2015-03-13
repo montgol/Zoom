@@ -89,6 +89,8 @@ h1, h2, h3, p {
 }
 #mobile{
     background-color: #000;
+    font-size: 20px;
+    text-align: center;
 }
 #mobilebutton{
     text-align: center;
