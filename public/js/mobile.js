@@ -17,8 +17,7 @@ window.addEventListener('deviceorientation', function(e) {
 });
 socket.on('crash', function(errBit) {
     if (!hasBuzzed) {
-        window.navigator.vibrate(500);
-        hasBuzzed = 1;
+        window.navigator.vibrate(200);
     }
 
 });

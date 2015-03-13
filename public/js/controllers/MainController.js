@@ -8,7 +8,11 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
+<<<<<<< HEAD
 app.controller("MainController", function($scope,ngDialog) {
+=======
+app.controller("MainController", function($scope, ngDialog) {
+>>>>>>> master
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
 
@@ -20,6 +24,9 @@ app.controller("MainController", function($scope,ngDialog) {
         currXStep = 0,
         currYStep = 0,
         beenCalibrated = false;
+        lossCount = 0;
+        timesPlayed = 0;
+        score = 0;
     // enable vibration support
     socket.on('moveShip', function(moveObj) {
         // find rotation
@@ -176,7 +183,7 @@ app.controller("MainController", function($scope,ngDialog) {
         } else {
             if ($scope.stepHue) {
                 $scope.stepHue -= 20;
-                console.log('hue:', $scope.stepHue)
+                // console.log('hue:', $scope.stepHue)
             } else {
                 $scope.stepHue = 360;
             }
@@ -192,6 +199,8 @@ app.controller("MainController", function($scope,ngDialog) {
         $scope.moveShip();
         $scope.checkShip();
         $scope.$apply();
+        timesPlayed++;
+        // console.log("scope", $scope);
     }, 25);
 
     $scope.moveShip = function() {
@@ -223,17 +232,37 @@ app.controller("MainController", function($scope,ngDialog) {
         var ringX = $scope.tunnelEls[11].left;
         var ringY = $scope.tunnelEls[11].top;
         var distance=Math.sqrt(Math.pow((currXPos-ringX),2)+Math.pow((currYPos-ringY),2));
-        
-        if (distance>42){
-            console.log('LOSE');
-            socket.emit('buzz',{err:2});
-            var lose = ngDialog.open({
-                template:'template.html',
-                className: 'ngdialog-theme-plain'
-            });
-        }
-        else{
-            console.log('Dist: ',ringX,ringY,distance)
+        // Player has 3 turns
+        if (distance>42 && timesPlayed > 8){
+            lossCount++;
+            // when player loses once or twice times played reset after score set
+            if (lossCount == 1){
+                $("body").css("background-color", "yellow");
+                score = timesPlayed;
+                timesPlayed = 0;
+                socket.emit('buzz',{err:2});
+                console.log("@@@@@@@@@@@@@@@ 1 life lost ", score);
+            } else if (lossCount == 2) {
+                $("body").css("background-color", "red");
+                score += timesPlayed;
+                timesPlayed = 0;
+                socket.emit('buzz',{err:2});
+                console.log("@@@@@@@@@@@@@@@ 2 lives lost ", score);
+            // player loses, game is stopped, score is calculated and shown
+            } else if (lossCount == 3) {
+                $("body").css("background-color", "black");
+                score += timesPlayed * 100;
+                console.log(score);
+                clearInterval(t);
+                t=0;
+                var lose = ngDialog.open({
+                    template:'score.html',
+                    className: 'ngdialog-theme-plain'
+                });
+        // }
+        // else{
+            // console.log('Dist: ',ringX,ringY,distance)
+            }
         }
     }
 });
