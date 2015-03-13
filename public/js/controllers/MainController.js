@@ -20,19 +20,25 @@ app.controller("MainController", function($scope, ngDialog) {
         calib = 180,
         currXStep = 0,
         currYStep = 0,
-        beenCalibrated = false;
-        lossCount = 0;
-        timesPlayed = 0;
-        score = 0;
-    // enable vibration support
+        beenCalibrated = false,
+        lossCount = 0,
+        timesPlayed = 0,
+        score = 0,
+        moveEnabled = false,
+        firing = false;
+    //if move is 0, ship won't move. Used for debugging
+
     socket.on('moveShip', function(moveObj) {
         // find rotation
         xRot = 90 - (moveObj.pitch % 360);
         yRot = (-moveObj.roll % 360) - calib;
-        $('#shipCont').css('transform', 'rotateX(' + xRot + 'deg)  rotateY('+(180-yRot)+'deg)  rotateZ(' + yRot + 'deg)');
-        if (!beenCalibrated){
+        $('#shipCont').css('transform', 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg)');
+        if (!firing) {
+            $('#pewpew').css('transform', 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg) translateX(50px) translateY(-200px)');
+        }
+        if (!beenCalibrated) {
             calib = -moveObj.roll;
-            beenCalibrated=true;
+            beenCalibrated = true;
         }
     })
     $scope.tunnelEls = [{
@@ -124,7 +130,6 @@ app.controller("MainController", function($scope, ngDialog) {
     var currTime = 100;
     var currRing = 0; //used during transition phase;
     $scope.stepHue = 240; //number of sequences passed, in hue form!
-
     var t = setInterval(function() {
         if (currTime > 0) {
             //in a 'straight' phase
@@ -152,28 +157,27 @@ app.controller("MainController", function($scope, ngDialog) {
 
                 currRing++;
             }
-            var ringToGray = 18 - (currTime*2 % ringLen);
-            var ringToGray2 = 18 -(((currTime*2)-1)%ringLen);
-            var ringToGray3 = 18 -(((currTime*2)-2)%ringLen);
-            var ringToGray4 = 18 -(((currTime*2)-3)%ringLen);
-            var ringToGray5 = 18 -(((currTime*2)-4)%ringLen);
-            var ringToGray6 = 18 -(((currTime*2)-5)%ringLen);
+            var ringToGray = 18 - (currTime * 2 % ringLen);
+            var ringToGray2 = 18 - (((currTime * 2) - 1) % ringLen);
+            var ringToGray3 = 18 - (((currTime * 2) - 2) % ringLen);
+            var ringToGray4 = 18 - (((currTime * 2) - 3) % ringLen);
+            var ringToGray5 = 18 - (((currTime * 2) - 4) % ringLen);
+            var ringToGray6 = 18 - (((currTime * 2) - 5) % ringLen);
             for (var i = 0; i < ringLen; i++) {
                 //find the one grey ring
                 if (i == ringToGray) {
                     $scope.tunnelEls[i].sat = 100;
-                } else if(i == ringToGray2){
+                } else if (i == ringToGray2) {
                     $scope.tunnelEls[i].sat = 66;
-                } else if(i == ringToGray3){
+                } else if (i == ringToGray3) {
                     $scope.tunnelEls[i].sat = 33;
-                } else if(i == ringToGray4){
+                } else if (i == ringToGray4) {
                     $scope.tunnelEls[i].sat = 0;
-                } else if(i == ringToGray5){
+                } else if (i == ringToGray5) {
                     $scope.tunnelEls[i].sat = 33;
-                } else if(i == ringToGray6){
+                } else if (i == ringToGray6) {
                     $scope.tunnelEls[i].sat = 66;
-                }
-                else {
+                } else {
                     $scope.tunnelEls[i].sat = 100;
                 }
             }
@@ -191,20 +195,28 @@ app.controller("MainController", function($scope, ngDialog) {
             currX = 50 + ((Math.floor(Math.random() * 5) - 2) * 8);
             currY = 50 + ((Math.floor(Math.random() * 5) - 2) * 8);
             currRing = 0; //reset ring to change
-            
+
         }
+        $scope.engines();
         $scope.moveShip();
         $scope.checkShip();
         $scope.$apply();
         timesPlayed++;
         // console.log("scope", $scope);
     }, 25);
+    $scope.engines = function() {
+        var colTime = parseInt(Math.sin(currTime / 3) * 50);
+
+        var engCol = 'rgb(0,0,' + (colTime + 200) + ')';
+        $('#shipRearLef').css('border-bottom-color', engCol);
+        $('#shipRearRit').css('border-bottom-color', engCol);
+    }
 
     $scope.moveShip = function() {
         //note these are kinda backwards
-        var xRotAdj =(xRot - 90);
-            //left and right based on Y axis
-        if (Math.abs(yRot) > 0 ) {
+        var xRotAdj = (xRot - 90);
+        //left and right based on Y axis
+        if (Math.abs(yRot) > 0) {
             currXStep = (yRot / 90) * 2.5; //yes, X. We're rotating along Y AXIS and moving along X
         } else if (currXPos >= 100 || currXPos <= 0) {
             currXStep = 0;
@@ -215,50 +227,66 @@ app.controller("MainController", function($scope, ngDialog) {
         } else if (currYPos >= 100 || currYPos <= 0) {
             currYStep = 0;
         }
-
-        currXPos -= currXStep;
-        currYPos += currYStep;
-        // console.log('curr posX:',currXPos,'curr posY',currYPos)
+        if (moveEnabled) {
+            currXPos -= currXStep;
+            currYPos += currYStep;
+            // console.log('curr posX:',currXPos,'curr posY',currYPos)
+        } else {
+            currYPos = 50;
+            currXPos = 50;
+        }
         $('#shipCont').css({
             'left': parseInt(currXPos) + '%',
             'top': parseInt(currYPos) + '%'
-        })
-
+        });
+        if (!firing) {
+            $('#pewpew').css({
+                'left': parseInt(currXPos) + '%',
+                'top': parseInt(currYPos) + '%'
+            });
+        }
+        else{
+            //translate pewpew along Z for a number of cycles
+        }
     }
-    $scope.checkShip = function(){
+    $scope.checkShip = function() {
         var ringX = $scope.tunnelEls[11].left;
         var ringY = $scope.tunnelEls[11].top;
-        var distance=Math.sqrt(Math.pow((currXPos-ringX),2)+Math.pow((currYPos-ringY),2));
+        var distance = Math.sqrt(Math.pow((currXPos - ringX), 2) + Math.pow((currYPos - ringY), 2));
         // Player has 3 turns
-        if (distance>42 && timesPlayed > 8){
+        if (distance > 42 && timesPlayed > 8) {
             lossCount++;
             // when player loses once or twice times played reset after score set
-            if (lossCount == 1){
+            if (lossCount == 1) {
                 $("body").css("background-color", "yellow");
                 score = timesPlayed;
                 timesPlayed = 0;
-                socket.emit('buzz',{err:2});
+                socket.emit('buzz', {
+                    err: 2
+                });
                 console.log("@@@@@@@@@@@@@@@ 1 life lost ", score);
             } else if (lossCount == 2) {
                 $("body").css("background-color", "red");
                 score += timesPlayed;
                 timesPlayed = 0;
-                socket.emit('buzz',{err:2});
+                socket.emit('buzz', {
+                    err: 2
+                });
                 console.log("@@@@@@@@@@@@@@@ 2 lives lost ", score);
-            // player loses, game is stopped, score is calculated and shown
+                // player loses, game is stopped, score is calculated and shown
             } else if (lossCount == 3) {
                 $("body").css("background-color", "black");
                 score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
-                t=0;
+                t = 0;
                 var lose = ngDialog.open({
-                    template:'score.html',
+                    template: 'score.html',
                     className: 'ngdialog-theme-plain'
                 });
-        // }
-        // else{
-            // console.log('Dist: ',ringX,ringY,distance)
+                // }
+                // else{
+                // console.log('Dist: ',ringX,ringY,distance)
             }
         }
     }
