@@ -8,7 +8,7 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
-app.controller("MainController", function($scope) {
+app.controller("MainController", function($scope,ngDialog) {
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
 
@@ -148,20 +148,26 @@ app.controller("MainController", function($scope) {
 
                 currRing++;
             }
-            var ringToGray = 18 - (currTime % ringLen);
-            var ringToGray2 = 18 -((currTime-1)%ringLen);
-            var ringToGray3 = 18 -((currTime-2)%ringLen);
-            var ringToGray4 = 18 -((currTime-3)%ringLen);
+            var ringToGray = 18 - (currTime*2 % ringLen);
+            var ringToGray2 = 18 -(((currTime*2)-1)%ringLen);
+            var ringToGray3 = 18 -(((currTime*2)-2)%ringLen);
+            var ringToGray4 = 18 -(((currTime*2)-3)%ringLen);
+            var ringToGray5 = 18 -(((currTime*2)-4)%ringLen);
+            var ringToGray6 = 18 -(((currTime*2)-5)%ringLen);
             for (var i = 0; i < ringLen; i++) {
                 //find the one grey ring
                 if (i == ringToGray) {
-                    $scope.tunnelEls[i].sat = 0;
+                    $scope.tunnelEls[i].sat = 100;
                 } else if(i == ringToGray2){
-                    $scope.tunnelEls[i].sat = 25;
+                    $scope.tunnelEls[i].sat = 66;
                 } else if(i == ringToGray3){
-                    $scope.tunnelEls[i].sat = 50;
+                    $scope.tunnelEls[i].sat = 33;
                 } else if(i == ringToGray4){
-                    $scope.tunnelEls[i].sat = 75;
+                    $scope.tunnelEls[i].sat = 0;
+                } else if(i == ringToGray5){
+                    $scope.tunnelEls[i].sat = 33;
+                } else if(i == ringToGray6){
+                    $scope.tunnelEls[i].sat = 66;
                 }
                 else {
                     $scope.tunnelEls[i].sat = 100;
@@ -220,9 +226,9 @@ app.controller("MainController", function($scope) {
         
         if (distance>42){
             console.log('LOSE');
+            socket.emit('buzz',{err:2});
             var lose = ngDialog.open({
-                template:'<b>OH NOES</b>',
-                plain: true,
+                template:'template.html',
                 className: 'ngdialog-theme-plain'
             });
         }

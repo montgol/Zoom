@@ -34,6 +34,10 @@ io.on('connection', function(socket) {
         console.log(moveObj);
         io.emit('moveShip', moveObj); //move the ship 
     });
+    socket.on('buzz',function(err){
+        console.log('BOOM');
+        io.emit('crash',err)
+    })
 
 });
 
