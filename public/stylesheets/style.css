@@ -123,3 +123,14 @@ h1, h2, h3, p {
     margin-left: auto;
     margin-left: auto;
 }
+.scorebox{
+    position: fixed;
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 200px;
+    height: 100px;
+}
+.movefront{
+    z-index:10000;
+    transform:translateZ(500);
+}

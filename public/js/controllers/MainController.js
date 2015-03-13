@@ -257,25 +257,21 @@ app.controller("MainController", function($scope, ngDialog) {
         if (distance > 42 && timesPlayed > 8) {
             lossCount++;
             // when player loses once or twice times played reset after score set
-            if (lossCount == 1) {
-                $("body").css("background-color", "yellow");
+
+            if (lossCount == 1){
                 score = timesPlayed;
                 timesPlayed = 0;
                 socket.emit('buzz', {
                     err: 2
                 });
-                console.log("@@@@@@@@@@@@@@@ 1 life lost ", score);
             } else if (lossCount == 2) {
-                $("body").css("background-color", "red");
                 score += timesPlayed;
                 timesPlayed = 0;
                 socket.emit('buzz', {
                     err: 2
                 });
-                console.log("@@@@@@@@@@@@@@@ 2 lives lost ", score);
                 // player loses, game is stopped, score is calculated and shown
             } else if (lossCount == 3) {
-                $("body").css("background-color", "black");
                 score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
@@ -284,10 +280,8 @@ app.controller("MainController", function($scope, ngDialog) {
                     template: 'score.html',
                     className: 'ngdialog-theme-plain'
                 });
-                // }
-                // else{
-                // console.log('Dist: ',ringX,ringY,distance)
             }
         }
+    $scope.score = score;
     }
 });
