@@ -1,4 +1,4 @@
-var app = angular.module("Ship", ['ngDialog']);
+var app = angular.module("Ship");
 
 var socket = io();
 
@@ -8,7 +8,7 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
-app.controller("MainController", function($scope, ngDialog) {
+app.controller("MainController", function($scope) {
 
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
@@ -249,10 +249,6 @@ app.controller("MainController", function($scope, ngDialog) {
                 console.log(score);
                 clearInterval(t);
                 t=0;
-                var lose = ngDialog.open({
-                    template:'score.html',
-                    className: 'ngdialog-theme-plain'
-                });
             }
         }
     $scope.score = score;
