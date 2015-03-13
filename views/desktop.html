@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <div class="scorebox"><div>
-    <h1 class="text-center">Ship Stuff</h1>
-    <h2 class='text-center'>Witty sub-title to be determined</h2>
+
     <div ng-app='Ship' ng-controller='MainController' id='container'>
+        <div class="scorebox movefront">
+            <h3>Score Box</h3>
+            <h4>{{ score }}</h4>
+        </div>
         <div id='meta-container'>
             <div id='shipCont'>
                 <div id='shipNoseBot' class='shipNose shadeMe'></div>
