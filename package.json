@@ -1,18 +1,18 @@
 {
-  "name": "Tilt",
+  "name": "zoomstack",
   "version": "1.0.0",
-  "description": "Music app using phone accelerometers for pitch. multiple fone inputz",
+  "description": "Fly a spaceship (or other stuff) using... just your phone!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
   "keywords": [
-    "music",
+    "space",
     "phone",
     "accelerometer",
-    "multiplayer",
-    "symphony"
+    "scifi",
+    "doctor",
+    "who"
   ],
   "author": "David Newman",
   "license": "ISC",
