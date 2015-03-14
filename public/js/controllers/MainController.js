@@ -8,7 +8,7 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
-app.controller("MainController", function($scope, ngDialog) {
+app.controller("MainController", function($scope, ngDialog, $window) {
 
     $scope.cht = false;
     var chtArr = [100, 111, 99, 116, 111, 114];
@@ -276,6 +276,9 @@ app.controller("MainController", function($scope, ngDialog) {
                 score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
+                $window.location.href=("/highscore");
+  
+
                 $('#soundTrack').attr('src','');
                 var lose = ngDialog.open({
                     template: 'score.html',
@@ -284,5 +287,6 @@ app.controller("MainController", function($scope, ngDialog) {
             }
         }
         $scope.score = score;
+
     };
 });
