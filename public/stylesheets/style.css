@@ -95,6 +95,8 @@ h1, h2, h3, p {
 
 #mobile {
     background-color: #000;
+    font-size: 20px;
+    text-align: center;
 }
 #mobilebutton {
     text-align: center;
@@ -223,3 +225,12 @@ h1, h2, h3, p {
     transform-style: preserve-3d;
 }
 /*no more secrets!*/
+
+img{
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    left: 160px;
+    top: 400px;
+}
+

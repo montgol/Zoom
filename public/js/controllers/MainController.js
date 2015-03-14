@@ -42,7 +42,7 @@ app.controller("MainController", function($scope, ngDialog) {
         lossCount = 0,
         timesPlayed = 0,
         score = 0,
-        moveEnabled = true,
+        moveEnabled = true;
     //if move is 0, ship won't move. Used for debugging
 
     socket.on('moveShip', function(moveObj) {
