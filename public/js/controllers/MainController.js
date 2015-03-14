@@ -24,7 +24,12 @@ app.controller("MainController", function($scope, ngDialog) {
         lossCount = 0,
         timesPlayed = 0,
         score = 0,
-        moveEnabled = false,
+        moveEnabled = true,
+        fireRotData = '',
+        fireTransData = {
+            left:0,
+            top:0
+        },
         firing = false;
     //if move is 0, ship won't move. Used for debugging
 
@@ -34,7 +39,8 @@ app.controller("MainController", function($scope, ngDialog) {
         yRot = (-moveObj.roll % 360) - calib;
         $('#shipCont').css('transform', 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg)');
         if (!firing) {
-            $('#pewpew').css('transform', 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg) translateX(50px) translateY(-200px)');
+            fireRotData = 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg) translateX(50px) translateY(-100px)';
+            $('#pewpew').css('transform', fireRotData);
         }
         if (!beenCalibrated) {
             calib = -moveObj.roll;
@@ -244,8 +250,9 @@ app.controller("MainController", function($scope, ngDialog) {
                 'left': parseInt(currXPos) + '%',
                 'top': parseInt(currYPos) + '%'
             });
-        }
-        else{
+            fireTransData.top = currYPos;
+            fireTransData.left = currXPos;
+        } else {
             //translate pewpew along Z for a number of cycles
         }
     }
@@ -258,7 +265,7 @@ app.controller("MainController", function($scope, ngDialog) {
             lossCount++;
             // when player loses once or twice times played reset after score set
 
-            if (lossCount == 1){
+            if (lossCount == 1) {
                 score = timesPlayed;
                 timesPlayed = 0;
                 socket.emit('buzz', {
@@ -282,6 +289,13 @@ app.controller("MainController", function($scope, ngDialog) {
                 });
             }
         }
-    $scope.score = score;
-    }
+        $scope.score = score;
+        socket.on('fired',function(emptyObj){
+            $scope.fire(); 
+        })
+        $scope.fire = function(){
+            var pew = $('#pewpew');
+            firing=true;
+        }
+    };
 });
