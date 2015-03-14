@@ -117,6 +117,8 @@ h1, h2, h3, p {
 }
 #mobile {
     background-color: #000;
+    font-size: 20px;
+    text-align: center;
 }
 #mobilebutton {
     text-align: center;
@@ -133,4 +135,8 @@ h1, h2, h3, p {
 .movefront{
     z-index:10000;
     transform:translateZ(500);
+}
+img{
+    width: 200px;
+    height: 200px;
 }

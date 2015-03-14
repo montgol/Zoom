@@ -25,6 +25,7 @@ app.controller("MainController", function($scope, ngDialog) {
         timesPlayed = 0,
         score = 0,
         moveEnabled = true,
+
         fireRotData = '',
         fireTransData = {
             left:0,
