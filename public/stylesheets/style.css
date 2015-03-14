@@ -137,6 +137,9 @@ h1, h2, h3, p {
     transform:translateZ(500);
 }
 img{
-    width: 200px;
-    height: 200px;
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    left: 160px;
+    top: 400px;
 }
