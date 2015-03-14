@@ -24,7 +24,7 @@ app.controller("MainController", function($scope, ngDialog) {
         lossCount = 0,
         timesPlayed = 0,
         score = 0,
-        moveEnabled = false,
+        moveEnabled = true,
         firing = false;
     //if move is 0, ship won't move. Used for debugging
 
