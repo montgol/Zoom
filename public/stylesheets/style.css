@@ -136,3 +136,7 @@ h1, h2, h3, p {
     z-index:10000;
     transform:translateZ(500);
 }
+img{
+    width: 200px;
+    height: 200px;
+}
