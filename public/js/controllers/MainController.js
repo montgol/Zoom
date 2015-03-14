@@ -8,7 +8,7 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 
-app.controller("MainController", function($scope, ngDialog) {
+app.controller("MainController", function($scope, ngDialog, $window) {
 
 
     $('#shipCont').css('transform', 'rotateX(90deg) ');
@@ -284,13 +284,16 @@ app.controller("MainController", function($scope, ngDialog) {
                 console.log(score);
                 clearInterval(t);
                 t = 0;
-                var lose = ngDialog.open({
-                    template: 'score.html',
-                    className: 'ngdialog-theme-plain'
-                });
+                $window.location.href=("/highscore");
+                // var lose = ngDialog.open({
+                //     template: 'score.html',
+                //     className: 'ngdialog-theme-plain'
+                // });
             }
         }
         $scope.score = score;
+        sessionStorage.score = score;
+
         socket.on('fired',function(emptyObj){
             $scope.fire(); 
         })

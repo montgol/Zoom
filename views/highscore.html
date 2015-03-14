@@ -1,0 +1,33 @@
+<!Doctype html>
+<html>
+
+<head>
+    <title>Phone Orientation Stuff</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+</head>
+
+<body ng-app="HighScore">
+
+    <div id="highscore" ng-controller="highscoreController" id="highscore">
+
+        <form name="highscoreForm">
+            <h1 class="highscore">Name: </h1><input name="name" type="text" placeholder="Enter Name" ng-model="name" /> </br></br>
+            <h1 class="highscore" id="score"></h1></br>
+            <button type="submit" ng-click=newScore()>Submit</button>
+        
+        </form>
+        <div>
+
+            <li ng-repeat="score in allScores track by score.id">
+                {{ score.name }} {{ score.score }}</li>
+        </div>
+    </div> 
+
+    <script src='/angular/angular.js'></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src='/js/controllers/highscoreController.js'></script>
+    <script src='/js/factories/highscore.js'></script>
+</body>
+
+</html>
