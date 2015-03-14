@@ -234,3 +234,12 @@ img{
     top: 400px;
 }
 
+#highscore{
+    margin-top: 7%;
+    text-align: center;
+    font-size: 60px;
+}
+.highscore{
+    font-size: 90px;
+}
+

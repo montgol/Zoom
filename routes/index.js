@@ -13,4 +13,8 @@ router.get('/desktop',function(req,res,next){
 	res.sendFile('desktop.html',{"root":'./views'});
 });
 
+router.get('/highscore', function(req,res,next){
+	res.sendFile('highscore.html',{"root":'./views'});
+});
+
 module.exports=router;
