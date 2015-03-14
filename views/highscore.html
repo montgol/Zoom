@@ -12,17 +12,31 @@
     <div id="highscore" ng-controller="highscoreController" id="highscore">
 
         <form name="highscoreForm">
-            <h1 class="highscore">Name: </h1><input name="name" type="text" placeholder="Enter Name" ng-model="name" /> </br></br>
-            <h1 class="highscore" id="score"></h1></br>
-            <button type="submit" ng-click=newScore()>Submit</button>
-        
-        </form>
-        <div>
+            <h1 class="highscore">Name: </h1>
+            <input name="name" type="text" placeholder="Enter Name" ng-model="name" required/> </br>
+            <h1 class="highscore" id="score"></h1>
+           
+            <button type="submit" ng-click="newScore()" id='scoreSub'>Okay!</button>
 
-            <li ng-repeat="score in allScores track by score.id">
-                {{ score.name }} {{ score.score }}</li>
+        </form>
+        <hr/>
+        <div>
+            <table class='scoreTable'>
+                <tr>
+                    <th>NAME:
+                        <button title='Sort by name' class='sortBut' ng-class='{sortButAct:sortOrder=="name"}' ng-click='sortMe(0)'>&#8693;</button>
+                    </th>
+                    <th>SCORE:
+                        <button title='Sort by name' class='sortBut' ng-class='{sortButAct:sortOrder=="score"}' ng-click='sortMe(1)'>&#8693;</button>
+                    </th>
+                </tr>
+                <tr ng-repeat="score in allScores | orderBy:sortOrder">
+                    <td>{{ score.name }}</td>
+                    <td>{{ score.score }}</td>
+                </tr>
+            </table>
         </div>
-    </div> 
+    </div>
 
     <script src='/angular/angular.js'></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>

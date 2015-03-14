@@ -1,28 +1,59 @@
 var app = angular.module("HighScore", []);
 
 app.controller("highscoreController", function($scope) {
-	$scope.score = sessionStorage.score;
-  document.getElementById("score").innerHTML = "Your Score: " + sessionStorage.score;
-  
-  // set new score
-		if(!localStorage.name){
-			localStorage.name = angular.toJson([]);
-		}
+    $scope.score = sessionStorage.score;
+    document.getElementById("score").innerHTML = "Your Score: " + $scope.score;
 
-	$scope.allScores=[];
-	
-	var localJson = angular.fromJson(localStorage.name);
-	var length = localJson.length;
+    // set new score
+    if (!localStorage.name) {
+        localStorage.name = angular.toJson([]);
+    }
 
-  $scope.newScore = function(name){
-  	sessionStorage.name = $scope.name;
-  	console.log('click', sessionStorage.name, sessionStorage.score);
-	
-		localJson.unshift({name:$scope.name, score:$scope.score, id:length});
-		angular.copy(localJson,$scope.allScores);
-		localStorage.name = angular.toJson(localJson);
+    $scope.allScores = [];
+    //sorting!
+    $scope.sortOrder = 'name';
+    $scope.nameOrder = 1;
+    $scope.scoreOrder = 1;
 
-		console.log($scope.allScores);
-	}
+    $scope.sortMe = function(sortCol) {
+        if (!sortCol) {
+            //name
+            if ($scope.nameOrder) {
+                $scope.nameOrder = 0;
+                $scope.sortOrder = '-name';
+            } else {
+                $scope.nameOrder = 1;
+                $scope.sortOrder = 'name';
+            }
+
+        } else {
+            if ($scope.scoreOrder) {
+                $scope.scoreOrder = 0;
+                $scope.sortOrder = '-score';
+            } else {
+                $scope.scoreOrder = 1;
+                $scope.sortOrder = 'score';
+            }
+        }
+    }
+
+    var localJson = angular.fromJson(localStorage.name);
+    var length = localJson.length;
+    angular.copy(localJson, $scope.allScores);
+
+    $scope.newScore = function(name) {
+
+        localJson = angular.fromJson(localStorage.name);
+        length = localJson.length;
+        console.log(localJson)
+        localJson.unshift({
+            name: $scope.name,
+            score: $scope.score,
+            id: length
+        });
+        angular.copy(localJson, $scope.allScores);
+        console.log($scope.allScores)
+        localStorage.name = angular.toJson(localJson);
+    }
 
 });

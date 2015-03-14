@@ -276,6 +276,7 @@ app.controller("MainController", function($scope, ngDialog, $window) {
                 score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
+                sessionStorage.score = score;
                 $window.location.href=("/highscore");
   
 

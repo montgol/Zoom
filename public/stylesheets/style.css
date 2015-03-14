@@ -92,7 +92,6 @@ h1, h2, h3, p {
     border-color: hsl(0, 100%, 50%);
     text-align: center;
 }
-
 #mobile {
     background-color: #000;
     font-size: 20px;
@@ -103,19 +102,19 @@ h1, h2, h3, p {
     margin-left: auto;
     margin-left: auto;
 }
-.scorebox{
+.scorebox {
     position: fixed;
     margin-left: 5%;
     margin-top: 5%;
     width: 200px;
     height: 100px;
 }
-.movefront{
-    z-index:10000;
-    transform:translateZ(500);
+.movefront {
+    z-index: 10000;
+    transform: translateZ(500);
 }
-
 /*secret!*/
+
 .main {
     height: 732px;
     width: 466px;
@@ -202,8 +201,6 @@ h1, h2, h3, p {
     position: absolute;
     transform-origin: 50% 105%;
 }
-
-
 #triFront {
     border-bottom-color: #0B3D6A;
     transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
@@ -218,28 +215,80 @@ h1, h2, h3, p {
     border-bottom-color: #0B3D6A;
     transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
 }
-#tdShip{
-    width:200px;
-    height:200px;
-    transform:scale3d(.5,.5,.5);
+#tdShip {
+    width: 200px;
+    height: 200px;
+    transform: scale3d(.5, .5, .5);
     transform-style: preserve-3d;
 }
 /*no more secrets!*/
 
-img{
+img {
     width: 700px;
     height: 700px;
     position: absolute;
     left: 160px;
     top: 400px;
 }
-
-#highscore{
+#highscore {
     margin-top: 7%;
     text-align: center;
     font-size: 60px;
 }
-.highscore{
+.highscore {
     font-size: 90px;
+}
+.scoreTable {
+    position: relative;
+    top: 20px;
+    width: 50%;
+    margin-bottom: 200px;
+    font-size: 14pt;
+    margin: 0 auto;
+    text-align: left;
+    border: 3px outset #bbb;
+    box-shadow: 0 0 10px 5px #00f;
+}
+.scoreTable th {
+    background-color: #555;
+    padding: 5px;
+}
+.scoreTable td {
+    border-bottom: 2px groove #bbb;
+    padding: 2px;
+}
+.scoreTable tr:hover{
+    background-color:#002;
+    position:relative;
+    transform:scale(1.01,1.01);
+}
+.sortBut {
+    background-color: #666;
+    color: #bbb;
+    border-radius: 10%;
+}
+.sortBut:hover {
+    background-color: #888;
+}
+.sortButAct {
+    color: #fff;
+}
+#scoreSub {
+    background-color:#555;
+    font-family:'arial';
+    border:3px outset #555;
+    border-radius:10%;
+    color:#fff;
+    box-shadow:0 0 8px 4px #00f;
+}
+#scoreSub:hover{
+    animation:gloBurst .25s ease-out linear;
+    -webkit-animation:gloBurst .25s ease-out forwards;
+}
+
+@-webkit-keyframes gloBurst {
+    0% {box-shadow: 0 0 8px 4px #00f;}
+    50% {box-shadow: 0 0 30px 10px #00f;}
+    100% {box-shadow: 0 0 30px 1px #005;}
 }
 
