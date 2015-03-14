@@ -10,7 +10,25 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 app.controller("MainController", function($scope, ngDialog, $window) {
 
-
+    $scope.cht = false;
+    var chtArr = [100, 111, 99, 116, 111, 114];
+    var chtNum = 0;
+    document.onkeypress = function(e) {
+        //cheats!
+        console.log(String.fromCharCode(e.which), e.which)
+        if (e.which != chtArr[chtNum]) {
+            chtNum = 0;
+            $scope.cht = false;
+            $('#soundTrack').attr('src','http://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1');
+            $scope.moveEnabled=true;
+        } else if (e.which == chtArr[chtNum] && chtNum == chtArr.length - 1) {
+            $scope.cht = true
+            moveEnabled=false;
+            $('#soundTrack').attr('src','http://www.youtube.com/embed/szfBOAnRR7U?autoplay=1');
+        } else {
+            chtNum++;
+        }
+    }
     $('#shipCont').css('transform', 'rotateX(90deg) ');
 
     var xRot = 0,
@@ -24,25 +42,18 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         lossCount = 0,
         timesPlayed = 0,
         score = 0,
-        moveEnabled = true,
-
-        fireRotData = '',
-        fireTransData = {
-            left:0,
-            top:0
-        },
-        firing = false;
+        moveEnabled = true;
     //if move is 0, ship won't move. Used for debugging
 
     socket.on('moveShip', function(moveObj) {
         // find rotation
-        xRot = 90 - (moveObj.pitch % 360);
+        if (!$scope.cht) {
+            xRot = 90 - (moveObj.pitch % 360);
+        } else {
+            xRot = 0 - (moveObj.pitch % 360);
+        }
         yRot = (-moveObj.roll % 360) - calib;
         $('#shipCont').css('transform', 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg)');
-        if (!firing) {
-            fireRotData = 'rotateX(' + xRot + 'deg)  rotateY(' + (180 - yRot) + 'deg)  rotateZ(' + yRot + 'deg) translateX(50px) translateY(-100px)';
-            $('#pewpew').css('transform', fireRotData);
-        }
         if (!beenCalibrated) {
             calib = -moveObj.roll;
             beenCalibrated = true;
@@ -204,20 +215,12 @@ app.controller("MainController", function($scope, ngDialog, $window) {
             currRing = 0; //reset ring to change
 
         }
-        $scope.engines();
         $scope.moveShip();
         $scope.checkShip();
         $scope.$apply();
         timesPlayed++;
-        // console.log("scope", $scope);
-    }, 25);
-    $scope.engines = function() {
-        var colTime = parseInt(Math.sin(currTime / 3) * 50);
 
-        var engCol = 'rgb(0,0,' + (colTime + 200) + ')';
-        $('#shipRearLef').css('border-bottom-color', engCol);
-        $('#shipRearRit').css('border-bottom-color', engCol);
-    }
+    }, 25);
 
     $scope.moveShip = function() {
         //note these are kinda backwards
@@ -246,16 +249,6 @@ app.controller("MainController", function($scope, ngDialog, $window) {
             'left': parseInt(currXPos) + '%',
             'top': parseInt(currYPos) + '%'
         });
-        if (!firing) {
-            $('#pewpew').css({
-                'left': parseInt(currXPos) + '%',
-                'top': parseInt(currYPos) + '%'
-            });
-            fireTransData.top = currYPos;
-            fireTransData.left = currXPos;
-        } else {
-            //translate pewpew along Z for a number of cycles
-        }
     }
     $scope.checkShip = function() {
         var ringX = $scope.tunnelEls[11].left;
@@ -283,23 +276,17 @@ app.controller("MainController", function($scope, ngDialog, $window) {
                 score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
-                t = 0;
                 $window.location.href=("/highscore");
-                // var lose = ngDialog.open({
-                //     template: 'score.html',
-                //     className: 'ngdialog-theme-plain'
-                // });
+  
+
+                $('#soundTrack').attr('src','');
+                var lose = ngDialog.open({
+                    template: 'score.html',
+                    className: 'ngdialog-theme-plain'
+                });
             }
         }
         $scope.score = score;
-        sessionStorage.score = score;
 
-        socket.on('fired',function(emptyObj){
-            $scope.fire(); 
-        })
-        $scope.fire = function(){
-            var pew = $('#pewpew');
-            firing=true;
-        }
     };
 });

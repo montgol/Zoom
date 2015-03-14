@@ -92,29 +92,7 @@ h1, h2, h3, p {
     border-color: hsl(0, 100%, 50%);
     text-align: center;
 }
-#pewpew {
-    position: absolute;
-    width: 100px;
-    height: 200px;
-    left: 50%;
-    transform-origin: 50% 250px;
-      transform-style:preserve-3d;
-    z-index: 50000;
-}
-.pewShape {
-    background-color: #0f0;
-    box-shadow: 0 0 9px #0f0;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    position:absolute;
-}
-#pew1{
-    transform:rotateX(90deg);
-}
-#pew2{
-    transform:rotateY(90deg);
-}
+
 #mobile {
     background-color: #000;
     font-size: 20px;
@@ -136,6 +114,118 @@ h1, h2, h3, p {
     z-index:10000;
     transform:translateZ(500);
 }
+
+/*secret!*/
+.main {
+    height: 732px;
+    width: 466px;
+    background-size: cover;
+    position: absolute;
+}
+#main-front {
+    background-image: url('/img/main-front.png');
+    transform: translateZ(-233px) rotateY(0deg);
+}
+.main-left-right {
+    background-image: url('/img/main-left-right.png');
+}
+#main-left {
+    transform: translateX(233px) rotateY(90deg);
+}
+#main-right {
+    transform: translateX(-233px) rotateY(270deg);
+}
+#main-rear {
+    background-image: url('/img/main-rear.png');
+    transform: translateZ(233px) rotateY(180deg);
+}
+#main-bot {
+    height: 466px;
+    width: 466px;
+    background-size: cover;
+    position: absolute;
+    background-image: url('/img/main-bot.png');
+    transform: rotateX(90deg) translateZ(-500px);
+}
+#doorSignCont {
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transform: translateX(-13px);
+}
+.doorSign {
+    background-image: url('/img/doorSign.png');
+    transform-style: preserve-3d;
+    width: 494px;
+    height: 58px;
+    background-size: cover;
+    position: absolute;
+}
+#signFront {
+    transform: rotateY(0deg) translateZ(247px) translateY(-54px);
+}
+#signLeft {
+    transform: rotateY(90deg) translateZ(247px) translateY(-54px);
+}
+#signRight {
+    transform: rotateY(270deg) translateZ(247px) translateY(-54px);
+}
+#signRear {
+    transform: rotateY(180deg) translateZ(247px) translateY(-54px);
+}
+.signTopBot {
+    background-image: url('/img/main-bot.png');
+    width: 494px;
+    height: 494px;
+    background-size: cover;
+    position: absolute;
+}
+#signTop {
+    transform: rotateX(90deg) translateZ(245px);
+}
+#signBot {
+    transform: rotateX(90deg) translateZ(299px);
+}
+#roofBevel {
+    transform-style: preserve-3d;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+.roofTri {
+    width: 0px;
+    height: 0px;
+    border-left: 233px solid transparent;
+    border-right: 233px solid transparent;
+    border-bottom: 243px solid #0A3965;
+    position: absolute;
+    transform-origin: 50% 105%;
+}
+
+
+#triFront {
+    border-bottom-color: #0B3D6A;
+    transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
+}
+#triLeft {
+    transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
+}
+#triRight {
+    transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
+}
+#triRear {
+    border-bottom-color: #0B3D6A;
+    transform: translateY(-262px) rotateX(73deg) translateZ(-13px) translateX(13px);
+}
+#tdShip{
+    width:200px;
+    height:200px;
+    transform:scale3d(.5,.5,.5);
+    transform-style: preserve-3d;
+}
+/*no more secrets!*/
+
 img{
     width: 700px;
     height: 700px;
@@ -143,6 +233,7 @@ img{
     left: 160px;
     top: 400px;
 }
+
 #highscore{
     margin-top: 7%;
     text-align: center;
@@ -151,3 +242,4 @@ img{
 .highscore{
     font-size: 90px;
 }
+
