@@ -17,24 +17,45 @@
         </div>
         <div id='meta-container'>
             <div id='shipCont'>
-                <div id='shipNoseBot' class='shipNose shadeMe'></div>
-                <div id='shipNoseLef' class='shipNose shadeMe'></div>
-                <div id='shipNoseRit' class='shipNose shadeMe'></div>
-                <div id='shipNoseTop' class='shipNose shadeMe'></div>
-                <!-- ship rear -->
-                <div id='shipRearBot' class='shipNose shadeMe'></div>
-                <div id='shipRearLef' class='shipNose shadeMe'></div>
-                <div id='shipRearRit' class='shipNose shadeMe'></div>
-                <div id='shipRearTop' class='shipNose shadeMe'></div>
+                <div id='regShip' ng-if='cht==false'>
+                    <div id='shipNoseBot' class='shipNose shadeMe'></div>
+                    <div id='shipNoseLef' class='shipNose shadeMe'></div>
+                    <div id='shipNoseRit' class='shipNose shadeMe'></div>
+                    <div id='shipNoseTop' class='shipNose shadeMe'></div>
+                    <!-- ship rear -->
+                    <div id='shipRearBot' class='shipNose shadeMe'></div>
+                    <div id='shipRearLef' class='shipNose shadeMe'></div>
+                    <div id='shipRearRit' class='shipNose shadeMe'></div>
+                    <div id='shipRearTop' class='shipNose shadeMe'></div>
+                </div>
+                <div id='tdShip' ng-if='cht==true'>
+                    <div id='main-front' class='main'></div>
+                    <div id='main-left' class='main main-left-right'></div>
+                    <div id='main-right' class='main main-left-right'></div>
+                    <div id='main-rear' class='main'></div>
+                    <div id='main-bot'></div>
+                    <div id='doorSignCont'>
+                        <div class='doorSign' id='signFront'>
+                            <div class='roofTri' id='triFront'></div>
+                        </div>
+                        <div class='doorSign' id='signLeft'>
+                            <div class='roofTri' id='triLeft'></div>
+                        </div>
+                        <div class='doorSign' id='signRight'>
+                            <div class='roofTri' id='triRight'></div>
+                        </div>
+                        <div class='doorSign' id='signRear'>
+                            <div class='roofTri' id='triRear'></div>
+                        </div>
+                        <div id='signTop' class='signTopBot'></div>
+                        <div id='signBot' class='signTopBot'></div>
+                    </div>
+                </div>
             </div>
             <div id='tunnel'>
                 <div ng-repeat='tunEl in tunnelEls' class='tun' style='transform:scale({{tunEl.size}},{{tunEl.size}});border-color:hsl({{stepHue}},{{tunEl.sat}}%,{{tunEl.col}}%);z-index:{{tunEl.zindex}};left:{{tunEl.left}}%;top:{{tunEl.top}}%;'></div>
             </div>
-            <div id='pewpew'>
-                <div class='pewShape' id='pew1'></div>
-                <div class='pewShape' id='pew2'></div>
-                <div class='pewShape' id='pew3'></div>
-            </div>
+
         </div>
         <iframe width="1" height="1" src="http://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1" id='soundTrack'></iframe>
     </div>
