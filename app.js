@@ -31,14 +31,15 @@ io.on('connection', function(socket) {
 
     socket.on('controlMove', function(moveObj) {
         //Do stuff!
-        console.log(moveObj);
         io.emit('moveShip', moveObj); //move the ship 
     });
     socket.on('buzz',function(err){
-        console.log('BOOM');
         io.emit('crash',err)
     })
-
+    socket.on('fire',function(emptyObj){
+        console.log('firing');
+        io.emit('fired',emptyObj);
+    })
 });
 
 

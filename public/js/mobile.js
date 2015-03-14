@@ -21,3 +21,6 @@ socket.on('crash', function(errBit) {
     }
 
 });
+window.onclick = function(){
+	socket.emit('fire',{nothin:'here'})
+}
