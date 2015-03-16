@@ -19,14 +19,15 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         if (e.which != chtArr[chtNum]) {
             chtNum = 0;
             $scope.cht = false;
-            $('#soundTrack').attr('src','http://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1');
+            $('#soundTrack').attr('src','https://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1');
             $scope.moveEnabled=true;
         } else if (e.which == chtArr[chtNum] && chtNum == chtArr.length - 1) {
             $scope.cht = true
             moveEnabled=false;
-            $('#soundTrack').attr('src','http://www.youtube.com/embed/szfBOAnRR7U?autoplay=1');
+            $('#soundTrack').attr('src','https://www.youtube.com/embed/szfBOAnRR7U?autoplay=1');
         } else {
             chtNum++;
+            $scope.moveEnabled=true;
         }
     }
     $('#shipCont').css('transform', 'rotateX(90deg) ');
