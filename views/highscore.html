@@ -10,15 +10,14 @@
 <body ng-app="HighScore">
     <div id="highscore" ng-controller="highscoreController" id="highscore">
         <h1 class="title">High Scores</h1>
-        <form name="highscoreForm">
+        <form name="highscoreForm" ng-if="!entered">
             <h1 class="highscore">Name: </h1>
             <input name="name" type="text" placeholder="Enter Name" ng-model="name" required/> </br>
             <h1 class="highscore" id="score"></h1>
-        
-            <button type="submit" ng-if="!entered" ng-click="newScore()" class='scoreSub'>Okay!</button>
-            <button type="submit" ng-if="entered" ng-click="redirect()" class='scoreSub'>Play Again</button>
 
+            <button type="submit" ng-click="newScore()" class='scoreSub'>Okay!</button>
         </form>
+        <button type="submit" ng-if="entered" ng-click="redirect()" class='scoreSub'>Play Again</button>
         <hr/>
         <div>
             <button type="submit" ng-click="clearScores()" class='scoreSub' class="btn-lg">Clear Scores</button>
@@ -35,7 +34,8 @@
                     <td>{{ score.name }}</td>
                     <td>{{ score.score }}</td>
                 </tr>
-                <tr ng-if="allScores.length<1"><td colspan=2>No scores yet!</tr>
+                <tr ng-if="allScores.length<1">
+                    <td colspan=2>No scores yet!</tr>
             </table>
         </div>
     </div>
