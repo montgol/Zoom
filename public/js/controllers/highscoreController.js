@@ -58,7 +58,16 @@ app.controller("highscoreController", function($scope) {
     }
 	$scope.redirect = function () {
 		window.location.href = "/index.html"
-	}    
+	} 
+
+	$scope.clearScores = function () {
+		var removeScore = confirm("Confirm Clear Scores");
+		if (removeScore) {
+			localStorage.removeItem("name");
+			window.location.href=("/highscore")
+		}
+	}
+
 
 
 });
