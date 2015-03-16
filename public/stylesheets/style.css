@@ -288,14 +288,6 @@ img {
     animation:gloBurst .25s ease-out linear;
     -webkit-animation:gloBurst .25s ease-out forwards;
 }
-#clearScore {
-    background-color:#555;
-    font-family:'arial';
-    border:3px outset #555;
-    border-radius:10%;
-    color:#fff;
-    box-shadow:0 0 8px 4px #00f; 
-}
 
 @-webkit-keyframes gloBurst {
     0% {box-shadow: 0 0 8px 4px #00f;}
