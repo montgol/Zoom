@@ -58,4 +58,5 @@ app.controller("mobileController", function($scope) {
         $('#gearTwo').css({'transform':'rotate('+($scope.horiz*-12)+'deg)'});
 
     };
+    $scope.score = sessionStorage.score;
 });

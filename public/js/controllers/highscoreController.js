@@ -39,8 +39,8 @@ app.controller("highscoreController", function($scope) {
 
     var localJson = angular.fromJson(localStorage.name);
     var length = localJson.length;
+    $scope.entered = false;  // for Okay/PlayAgain Button
     angular.copy(localJson, $scope.allScores);
-
     $scope.newScore = function(name) {
 
         localJson = angular.fromJson(localStorage.name);
@@ -54,6 +54,11 @@ app.controller("highscoreController", function($scope) {
         angular.copy(localJson, $scope.allScores);
         console.log($scope.allScores)
         localStorage.name = angular.toJson(localJson);
+        $scope.entered = true;
     }
+	$scope.redirect = function () {
+		window.location.href = "/index.html"
+	}    
+
 
 });

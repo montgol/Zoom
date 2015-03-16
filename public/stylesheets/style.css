@@ -18,7 +18,7 @@ h1, h2, h3, p {
 }
 #title {
     color: #1877D6;
-    font-size: 80px;
+    font-size: 180px;
     text-align: center;
     text-shadow: 5px 5px 5px #CCC;
 }
@@ -101,6 +101,7 @@ h1, h2, h3, p {
 }
 #mobilebutton {
     text-align: center;
+    font-size: 100px;
     margin-left: auto;
     margin-left: auto;
 }
