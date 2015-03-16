@@ -34,8 +34,14 @@ io.on('connection', function(socket) {
         io.emit('moveShip', moveObj); //move the ship 
     });
     socket.on('buzz',function(err){
-        io.emit('crash',err)
-    })
+        io.emit('crash',err);
+    });
+    socket.on('boomDead',function(nuthin){
+        io.emit('boomDone',nuthin);
+    });
+    socket.on('resetGame',function(reset){
+        io.emit('reset',reset);
+    });
 });
 
 

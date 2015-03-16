@@ -51,6 +51,9 @@ app.controller("highscoreController", function($scope) {
             score: $scope.score,
             id: length
         });
+        localJson.forEach(function(el){
+            el.score = parseInt(el.score);
+        })
         angular.copy(localJson, $scope.allScores);
         console.log($scope.allScores)
         localStorage.name = angular.toJson(localJson);

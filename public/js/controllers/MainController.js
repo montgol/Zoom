@@ -9,7 +9,7 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 app.controller("MainController", function($scope, ngDialog, $window) {
-
+    socket.emit('resetGame',{meh:1});
     $scope.cht = false;
     var chtArr = [100, 111, 99, 116, 111, 114];
     var chtNum = 0;
@@ -275,10 +275,12 @@ app.controller("MainController", function($scope, ngDialog, $window) {
                 console.log(score);
                 clearInterval(t);
                 sessionStorage.score = score;
+                $('#soundTrack').attr('src','');
+                socket.emit('boomDead',{err:3});
                 $window.location.href=("/highscore");
   
 
-                $('#soundTrack').attr('src','');
+
                 var lose = ngDialog.open({
                     template: 'score.html',
                     className: 'ngdialog-theme-plain'
