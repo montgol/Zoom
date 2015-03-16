@@ -5,6 +5,7 @@ app.controller("mobileController", function($scope) {
     var hasBuzzed = 0;
     $scope.horiz = 0;
     $scope.vert = 0;
+    $scope.crashDiv = false;
 
     window.addEventListener('deviceorientation', function(e) {
         var moveObj = {
@@ -20,10 +21,18 @@ app.controller("mobileController", function($scope) {
         $scope.$apply();
         socket.emit('controlMove', moveObj);
     });
+    socket.on('reset',function(resetBit){
+        $scope.crashDiv = false;
+        $scope.$apply();
+    })
     socket.on('crash', function(errBit) {
         if (!hasBuzzed) {
             window.navigator.vibrate(200);
         }
+    });
+    socket.on('boomDone',function(meh){
+        $scope.crashDiv = true;
+        $scope.$apply();
     });
     $scope.ind = function() {
         $('#vertInd').css({
@@ -39,4 +48,5 @@ app.controller("mobileController", function($scope) {
         $('#gearTwo').css({'transform':'rotate('+($scope.horiz*-12)+'deg)'});
 
     };
+    
 });
