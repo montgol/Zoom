@@ -36,10 +36,6 @@ io.on('connection', function(socket) {
     socket.on('buzz',function(err){
         io.emit('crash',err)
     })
-    socket.on('fire',function(emptyObj){
-        console.log('firing');
-        io.emit('fired',emptyObj);
-    })
 });
 
 
