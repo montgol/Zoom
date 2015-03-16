@@ -384,3 +384,12 @@ img {
     left:25px;
     top:20px;
 }
+#cracked{
+    background-image: url('/img/crash.png');
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    background-size: 100% 100%;
+    background-repeat: repeat;
+    z-index:4;
+}
