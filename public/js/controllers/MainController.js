@@ -9,7 +9,9 @@ var allToShade = document.getElementsByClassName('shadeMe');
 
 
 app.controller("MainController", function($scope, ngDialog, $window) {
-    socket.emit('resetGame',{meh:1});
+    socket.emit('resetGame', {
+        meh: 1
+    });
     $scope.cht = false;
     var chtArr = [100, 111, 99, 116, 111, 114];
     var chtNum = 0;
@@ -19,15 +21,15 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         if (e.which != chtArr[chtNum]) {
             chtNum = 0;
             $scope.cht = false;
-            $('#soundTrack').attr('src','https://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1');
-            $scope.moveEnabled=true;
+            $('#soundTrack').attr('src', 'https://www.youtube.com/embed/-ReMkT6BLuc?autoplay=1');
+            $scope.moveEnabled = true;
         } else if (e.which == chtArr[chtNum] && chtNum == chtArr.length - 1) {
             $scope.cht = true
-            moveEnabled=false;
-            $('#soundTrack').attr('src','https://www.youtube.com/embed/szfBOAnRR7U?autoplay=1');
+            moveEnabled = false;
+            $('#soundTrack').attr('src', 'https://www.youtube.com/embed/szfBOAnRR7U?autoplay=1');
         } else {
             chtNum++;
-            $scope.moveEnabled=true;
+            $scope.moveEnabled = true;
         }
     }
     $('#shipCont').css('transform', 'rotateX(90deg) ');
@@ -40,10 +42,12 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         currXStep = 0,
         currYStep = 0,
         beenCalibrated = false,
-        lossCount = 0,
+        lossCount = 3,
         timesPlayed = 0,
         score = 0,
-        moveEnabled = true;
+        moveEnabled = true,
+        timeSinceLastDeath = 0;
+    $scope.heartArr = [];
     //if move is 0, ship won't move. Used for debugging
 
     socket.on('moveShip', function(moveObj) {
@@ -218,8 +222,14 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         }
         $scope.moveShip();
         $scope.checkShip();
+        $scope.heartArr = [];
+        for (var c = 0; c < lossCount; c++) {
+            $scope.heartArr.push(c);
+        }
+        console.log($scope.heartArr)
         $scope.$apply();
         timesPlayed++;
+        (timeSinceLastDeath) ? timeSinceLastDeath-- : timeSinceLastDeath = 0;
 
     }, 25);
 
@@ -256,31 +266,26 @@ app.controller("MainController", function($scope, ngDialog, $window) {
         var ringY = $scope.tunnelEls[11].top;
         var distance = Math.sqrt(Math.pow((currXPos - ringX), 2) + Math.pow((currYPos - ringY), 2));
         // Player has 3 turns
-        if (distance > 42 && timesPlayed > 8) {
-            lossCount++;
+        // if (distance > 42 && timesPlayed > 8) {
+        if (distance > 42 && timeSinceLastDeath < 1) {
+            lossCount--;
             // when player loses once or twice times played reset after score set
 
-            if (lossCount == 1) {
+            if (lossCount >= 0) {
                 timesPlayed = 0;
                 socket.emit('buzz', {
                     err: 2
                 });
-            } else if (lossCount == 2) {
-                timesPlayed = 0;
-                socket.emit('buzz', {
-                    err: 2
-                });
-                // player loses, game is stopped, score is calculated and shown
-            } else if (lossCount == 3) {
+                timeSinceLastDeath = 150;
+            } else if (lossCount < 0) {
                 console.log(score);
                 clearInterval(t);
                 sessionStorage.score = score;
-                $('#soundTrack').attr('src','');
-                socket.emit('boomDead',{err:3});
-                $window.location.href=("/highscore");
-  
-
-
+                $('#soundTrack').attr('src', '');
+                socket.emit('boomDead', {
+                    err: 3
+                });
+                $window.location.href = ("/highscore");
                 var lose = ngDialog.open({
                     template: 'score.html',
                     className: 'ngdialog-theme-plain'
@@ -288,7 +293,7 @@ app.controller("MainController", function($scope, ngDialog, $window) {
             }
         } else {
             var positionDistance = parseInt(distance);
-            score += parseInt((42 - positionDistance)/positionDistance * 10);
+            score += parseInt((42 - positionDistance) / positionDistance * 10);
         }
 
         $scope.score = score;

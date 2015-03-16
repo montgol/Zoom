@@ -1,3 +1,0 @@
-app.factory('highscore', function() {
-
-})
