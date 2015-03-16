@@ -261,20 +261,17 @@ app.controller("MainController", function($scope, ngDialog, $window) {
             // when player loses once or twice times played reset after score set
 
             if (lossCount == 1) {
-                score = timesPlayed;
                 timesPlayed = 0;
                 socket.emit('buzz', {
                     err: 2
                 });
             } else if (lossCount == 2) {
-                score += timesPlayed;
                 timesPlayed = 0;
                 socket.emit('buzz', {
                     err: 2
                 });
                 // player loses, game is stopped, score is calculated and shown
             } else if (lossCount == 3) {
-                score += timesPlayed * 100;
                 console.log(score);
                 clearInterval(t);
                 sessionStorage.score = score;
@@ -287,7 +284,11 @@ app.controller("MainController", function($scope, ngDialog, $window) {
                     className: 'ngdialog-theme-plain'
                 });
             }
+        } else {
+            var positionDistance = parseInt(distance);
+            score += parseInt((42 - positionDistance)/positionDistance * 10);
         }
+
         $scope.score = score;
 
     };
