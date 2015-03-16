@@ -96,6 +96,8 @@ h1, h2, h3, p {
     background-color: #000;
     font-size: 20px;
     text-align: center;
+    width:100vw;
+    height:100vh;
 }
 #mobilebutton {
     text-align: center;
@@ -123,7 +125,7 @@ h1, h2, h3, p {
 }
 #main-front {
     background-image: url('/img/main-front.png');
-    transform: translateZ(-233px) rotateY(0deg);
+    transform: translateZ(-233px) rotateY(0deg) scaleX(-1);
 }
 .main-left-right {
     background-image: url('/img/main-left-right.png');
@@ -292,3 +294,92 @@ img {
     100% {box-shadow: 0 0 30px 1px #005;}
 }
 
+#horizInd{
+    width:100vw;
+    height:10px;
+    background-color:#ccc;
+    position:absolute;
+    left:0px;
+    top:0px;
+    box-shadow:0 0 6px #222 inset;
+    z-index:1;
+}
+#horizInd:after {
+    background: linear-gradient(-45deg, #555 5px, transparent 0), linear-gradient(45deg, #555 5px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 10px 10px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 20px;
+}
+
+#horizInd:before {
+    background: linear-gradient(-45deg, #555 5px, transparent 0), linear-gradient(45deg, #555 5px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 10px 10px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 20px;
+    transform:scaleY(-1);
+}
+#vertInd{
+    width:10px;
+    box-shadow:0 0 6px #222 inset;
+    height:100vh;
+    background-color:#ccc;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:3;
+}
+#vertIndTube{
+    width:14px;
+    background-color: #999;
+    height:65px;
+    position:absolute;
+    left:-2px;
+    top:0px;
+}
+.gear{
+    background-image:url('/img/gear.png');
+    background-size: contain;
+    width:80px;
+    height:80px;
+    position:absolute;
+}
+#gearOne{
+    top:-50px;
+    left:10px;
+}
+#gearTwo{
+    top:35px;
+    left:10px;
+}
+#gearBar1{
+    position:absolute;
+    width:10px;
+    height:60px;
+    background-color: #555;
+    transform:rotate(45deg);
+    left:25px;
+    top:-20px;
+}
+#gearBar2{
+    position:absolute;
+    width:10px;
+    height:60px;
+    background-color: #555;
+    transform:rotate(-45deg);
+    left:25px;
+    top:20px;
+}
