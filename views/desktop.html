@@ -14,8 +14,11 @@
         <div class="scorebox movefront">
             <h3>Score Box</h3>
             <h4>{{ score }}</h4>
+            Lives Remaining:<span ng-repeat='n in heartArr' style='font-size:large;'>&#10084;</span>
+
         </div>
         <div id='meta-container'>
+
             <div id='shipCont'>
                 <div id='regShip' ng-if='cht==false'>
                     <div id='shipNoseBot' class='shipNose shadeMe'></div>
